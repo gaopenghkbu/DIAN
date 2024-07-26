@@ -220,9 +220,9 @@ class LocalBranch(nn.Module):
 
         return local_feat       
 
-class GeM(nn.Module):
+class G(nn.Module):
     def __init__(self, p=3, eps=1e-6, requires_grad=False):
-        super(GeM, self).__init__()
+        super(G, self).__init__()
         self.p = nn.Parameter(torch.ones(1)*p, requires_grad=requires_grad)
         self.eps = eps
 
@@ -235,14 +235,14 @@ class GeM(nn.Module):
     def __repr__(self):
         return self.__class__.__name__ + '(' + 'p=' + '{:.4f}'.format(self.p.data.tolist()[0]) + ', ' + 'eps=' + str(self.eps) + ')'
 
-class DolgNet(nn.Module):
+class OFMNet(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim, factor=2):
         super().__init__()
      
         self.orthogonal_fusion = OrthogonalFusion()
         self.local_branch = LocalBranch(input_dim, output_dim,hidden_dim,factor=factor)
         self.gap = nn.AdaptiveAvgPool2d(1)
-        self.gem_pool = GeM()
+        self.gem_pool = G()
         self.fc_1 = nn.Linear(output_dim, output_dim)
         self.fc_2 = nn.Linear(int(2*output_dim), output_dim)
         self.init_weights()
@@ -552,10 +552,10 @@ class embed_net(nn.Module):
             pool_dim = 2048
         # self.enhance_visible = RCBpaper(n_feat=1024)
         # self.enhance_thermal = RCBpaper(n_feat=1024)
-            self.DEE = IEDK2(in_channels=1024, mid_channels=1024, dataset='sysu')
-            self.MFA0 = DolgNet(input_dim=64, hidden_dim=16, output_dim=256, factor=1)
-            self.MFA1 = DolgNet(input_dim=256, hidden_dim=64, output_dim=512, factor=2)
-            self.MFA2 = DolgNet(input_dim=512, hidden_dim=128, output_dim=1024, factor=2)
+            self.DK = IEDK2(in_channels=1024, mid_channels=1024, dataset='sysu')
+            self.OFM1 = OFMNet(input_dim=64, hidden_dim=16, output_dim=256, factor=1)
+            self.OFM2 = OFMNet(input_dim=256, hidden_dim=64, output_dim=512, factor=2)
+            self.OFM3 = OFMNet(input_dim=512, hidden_dim=128, output_dim=1024, factor=2)
         #self.MFA3 = DolgNet(input_dim=1024, hidden_dim=256, output_dim=2048, factor=1)
         ###
         # self.MFA1 = AdaMScaleBlock(in_channel=256, out_channel=256)
@@ -590,12 +590,12 @@ class embed_net(nn.Module):
         if self.dataset=='sysu':
             x_ = x
             x = self.base_resnet.base.layer1(x_)
-            x_ = self.MFA0(x_low=x_, x_high=x)
+            x_ = self.OFM1(x_low=x_, x_high=x)
             x = self.base_resnet.base.layer2(x_)
-            x_ = self.MFA1(x_low=x_, x_high=x)
+            x_ = self.OFM2(x_low=x_, x_high=x)
 
             x = self.base_resnet.base.layer3(x_)
-            x_ = self.MFA2(x_low=x_, x_high=x)
+            x_ = self.OFM3(x_low=x_, x_high=x)
 
             x_ = self.DK(x_)
             x = self.base_resnet.base.layer4(x_)       
