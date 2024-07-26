@@ -22,4 +22,4 @@ python train.py --dataset sysu --gpu 0 --img_w 144 --img_h 288 --batch-size 6 --
 --dataset choose the dataset for training (SYSU-MM01, RegDB)
 --gpu select the GPU device
 ```
-For dataset acquisition, subscribe via https://github.com/wuancong/SYSU-MM01
+For dataset acquisition, subscribe via https://github.com/wuancong/SYSU-MM01, http://dm.dongguk.edu/link.html
