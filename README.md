@@ -24,7 +24,7 @@ python train.py --dataset sysu --gpu 0 --img_w 144 --img_h 288 --batch-size 6 --
 ```
 For dataset acquisition, subscribe via https://github.com/wuancong/SYSU-MM01, http://dm.dongguk.edu/link.html
 
-#Cite
+# Cite
 ```
 @article{gao2024dynamic,
   title={Dynamic Identity-Guided Attention Network for Visible-Infrared Person Re-identification},
