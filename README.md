@@ -15,4 +15,6 @@ To activate the environment:
 conda activate DIAN
 ```
 # Training
-python train.py --dataset sysu --gpu 0 
+```
+python train.py --dataset sysu --gpu 0
+```
