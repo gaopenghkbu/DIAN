@@ -23,3 +23,13 @@ python train.py --dataset sysu --gpu 0 --img_w 144 --img_h 288 --batch-size 6 --
 --gpu select the GPU device
 ```
 For dataset acquisition, subscribe via https://github.com/wuancong/SYSU-MM01, http://dm.dongguk.edu/link.html
+
+#Cite
+```
+@article{gao2024dynamic,
+  title={Dynamic Identity-Guided Attention Network for Visible-Infrared Person Re-identification},
+  author={Gao, Peng and Lee, Yujian and Zhang, Hui and Liu, Xubo and Hu, Yiyang and Jing, Guquan},
+  journal={arXiv preprint arXiv:2405.12713},
+  year={2024}
+}
+```
