@@ -13,4 +13,5 @@ conda info -envs
 To activate the environment:
 ```
 conda activate DIAN
+```
 # Training
