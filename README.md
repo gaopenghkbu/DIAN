@@ -18,3 +18,6 @@ conda activate DIAN
 ```
 python train.py --dataset sysu --gpu 0
 ```
+--dataset choose the dataset for training (SYSU-MM01, RegDB)
+--gpu select the GPU device
+For dataset acquisition, subscribe via https://github.com/wuancong/SYSU-MM01
