@@ -1,5 +1,5 @@
-# Project Leader: Yujian Lee (email: r130034019@mail)
-```
+Project Leader: Yujian Lee (email: r130034019@mail)
+
 # DIAN
 ## Dynamic Identity-Guided Attention Network for Visible-Infrared Person Re-identification
 ![image](https://github.com/gaopenghkbu/DIAN/blob/main/Model_architecture.png)
